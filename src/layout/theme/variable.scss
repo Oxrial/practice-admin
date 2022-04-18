@@ -1,0 +1,9 @@
+$theme: (
+	aside_width: 250px,
+	aside_theme: #001529,
+	header_border_color: #ecf5ff,
+	logo_height: 60px
+);
+@function theme($key) {
+	@return map-get($theme, unquote($key));
+}

@@ -1,0 +1,7 @@
+@import '@/layout/theme/variable.scss';
+
+:export {
+	@each $key, $value in $theme {
+		#{unquote($key)}: $value;
+	}
+}

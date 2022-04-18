@@ -1,0 +1,11 @@
+@import '@/assets/style.module.scss';
+// 父级%占位继承
+%centent-scrollbar {
+	height: calc(100vh - theme(logo_height));
+	:deep(.el-scrollbar__wrap) {
+		height: inherit;
+		.el-scrollbar__view {
+			height: inherit;
+		}
+	}
+}

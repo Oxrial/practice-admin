@@ -1,0 +1,24 @@
+.el-sub-menu {
+	&:deep(.el-sub-menu__title:hover) {
+		// background: skyblue !important;
+		span {
+			color: #fff;
+		}
+	}
+	&.is-active {
+		.el-sub-menu__title {
+			span {
+				color: #fff;
+			}
+		}
+	}
+}
+.el-menu-item {
+	&:hover {
+		color: #fff;
+	}
+	&.is-active {
+		background-color: var(--el-color-primary);
+		color: #fff;
+	}
+}

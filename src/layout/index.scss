@@ -1,0 +1,27 @@
+@import '@/assets/style.module.scss';
+::-webkit-scrollbar {
+	width: 6px !important;
+	height: 6px !important;
+	// background-color: $Gray2;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #90939980 !important;
+	border-radius: 5px;
+}
+
+.el-aside {
+	background-color: theme(aside_theme);
+	height: 100vh;
+}
+.el-header {
+	height: 60px;
+	line-height: 60px;
+	border-bottom: 1px theme(header_border_color) solid;
+	display: flex;
+	align-items: center;
+}
+.el-main {
+	padding: unset;
+	height: calc(100vh - theme(logo_height));
+}

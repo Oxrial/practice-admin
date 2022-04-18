@@ -1,0 +1,62 @@
+<template>
+	this is home content <br />
+
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asdfasdf
+	<h1>hoe</h1>
+	asd
+</template>
+
+<script setup lang="ts"></script>
+<style scoped></style>
