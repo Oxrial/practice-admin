@@ -19,8 +19,6 @@
 					:index="(parentsPath ? parentsPath + '/' : '') + menu.path"
 				>
 					<menu-title :menu="menu"></menu-title>
-					<!-- <el-icon><component :is="menu.meta?.icon" /></el-icon>
-					<span>{{ menu.meta?.title }}</span> -->
 				</el-menu-item>
 			</template>
 		</template>
