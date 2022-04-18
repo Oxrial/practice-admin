@@ -1,0 +1,8 @@
+.collpase-btn {
+	cursor: pointer;
+	padding: 5px;
+	margin-right: 20px;
+	&:hover {
+		background-color: theme(header_border);
+	}
+}

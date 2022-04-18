@@ -27,12 +27,5 @@ const clickCollapse = () => {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/style.module.scss';
-.collpase-btn {
-	cursor: pointer;
-	padding: 5px;
-	&:hover {
-		background-color: theme(header_border);
-	}
-}
+@import './index.scss';
 </style>
