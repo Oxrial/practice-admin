@@ -12,6 +12,7 @@
 	}
 }
 .el-menu-vertical-demo {
+	border-right: unset;
 	min-height: calc(100vh - 60px);
 
 	&:not(.el-menu--collapse) {

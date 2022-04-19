@@ -7,5 +7,4 @@
 svg {
 	width: 1em;
 }
-
 </style>

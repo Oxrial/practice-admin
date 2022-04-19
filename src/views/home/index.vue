@@ -1,62 +1,6 @@
 <template>
-	this is home content <br />
-
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asdfasdf
-	<h1>hoe</h1>
-	asd
+	<el-card>THIS IS HOME STAGE</el-card>
 </template>
 
 <script setup lang="ts"></script>
-<style scoped></style>
+<style scoped lang="scss"></style>

@@ -24,4 +24,5 @@
 .el-main {
 	padding: unset;
 	height: calc(100vh - theme(logo_height));
+	background-color: theme(main_background_color);
 }

@@ -1,8 +1,10 @@
 <template>
-	<div class="c-l">1</div>
-	<div class="c-l">2</div>
-	<div class="c-l">3</div>
-	<div class="c-l">4</div>
+	<el-card>
+		<div class="c-l">1</div>
+		<div class="c-l">2</div>
+		<div class="c-l">3</div>
+		<div class="c-l">4</div>
+	</el-card>
 </template>
 
 <script setup>

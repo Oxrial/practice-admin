@@ -2,7 +2,8 @@ $theme: (
 	aside_width: 250px,
 	aside_theme: #001529,
 	header_border_color: #ecf5ff,
-	logo_height: 60px
+	logo_height: 60px,
+	main_background_color: #f5f6fa
 );
 @function theme($key) {
 	@return map-get($theme, unquote($key));

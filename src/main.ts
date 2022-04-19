@@ -4,6 +4,7 @@ import router from './router'
 import 'normalize.css/normalize.css'
 import ElementPlus from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
+import { createPinia } from 'pinia'
 import * as Icons from '@element-plus/icons-vue'
 import { hump2Bar } from './utils'
 const app = createApp(App)
@@ -11,4 +12,4 @@ const app = createApp(App)
 for (const icon in Icons) {
 	app.component(`el-icon-${hump2Bar(icon)}`, (Icons as any)[icon])
 }
-app.use(router).use(ElementPlus).mount('#app')
+app.use(router).use(ElementPlus).use(createPinia()).mount('#app')

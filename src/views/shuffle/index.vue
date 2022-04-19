@@ -1,11 +1,13 @@
 <template>
-	<h2>SHUFFLE</h2>
-	<el-button @click="() => (list = shuffle(list))">RANDOM</el-button>
-	<transition-group move-class="wraps-move" class="wraps" tag="div">
-		<div class="wraps-item" v-for="numb in list" :key="numb.id">
-			{{ numb.num }}
-		</div>
-	</transition-group>
+	<el-card>
+		<h2>SHUFFLE</h2>
+		<el-button @click="() => (list = shuffle(list))">RANDOM</el-button>
+		<transition-group move-class="wraps-move" class="wraps" tag="div">
+			<div class="wraps-item" v-for="numb in list" :key="numb.id">
+				{{ numb.num }}
+			</div>
+		</transition-group>
+	</el-card>
 </template>
 
 <script setup lang="ts">

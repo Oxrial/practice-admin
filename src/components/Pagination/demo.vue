@@ -1,10 +1,12 @@
 <template>
-	<Pagination
-		v-bind="page.config"
-		layout="'total,prev, pager, next, sizes'"
-		:config="page.config"
-		@current-change="(val) => (page.config.currentPage = val)"
-	></Pagination>
+	<el-card>
+		<Pagination
+			v-bind="page.config"
+			layout="'total,prev, pager, next, sizes'"
+			:config="page.config"
+			@current-change="(val) => (page.config.currentPage = val)"
+		/>
+	</el-card>
 </template>
 
 <script setup>

@@ -41,6 +41,11 @@ export const routesObj = [
 				path: 'bus',
 				component: () => import('@/views/bus-demo/index.vue'),
 				meta: { title: '公共串行BUS', icon: 'el-icon-eleme' }
+			},
+			{
+				path: 'pinia',
+				component: () => import('@/views/pinia-demo/index.vue'),
+				meta: { title: 'Pinia', icon: 'el-icon-eleme' }
 			}
 		]
 	},

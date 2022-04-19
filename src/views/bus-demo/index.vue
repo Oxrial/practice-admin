@@ -1,6 +1,8 @@
 <template>
-	<BusA></BusA>
-	<BusB></BusB>
+	<el-card>
+		<BusA></BusA>
+		<BusB></BusB>
+	</el-card>
 </template>
 
 <script setup>
