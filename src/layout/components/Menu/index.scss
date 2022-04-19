@@ -1,0 +1,45 @@
+@import '@/assets/style.module.scss';
+@import '@/layout/theme/common.scss';
+.logo-main {
+	height: 60px;
+	display: flex;
+	position: relative;
+	justify-content: center;
+	.project-logo {
+		display: flex;
+		height: theme(logo_height);
+		position: absolute;
+	}
+}
+.el-menu-vertical-demo {
+	min-height: calc(100vh - 60px);
+
+	&:not(.el-menu--collapse) {
+		width: theme(aside_width);
+	}
+}
+
+.el-scrollbar.submenu-main {
+	@extend %centent-scrollbar;
+}
+
+.logoTransition-enter-active {
+	transition: all 0.3s;
+}
+
+.logoTransition-enter-from {
+	width: 64px;
+}
+.logoTransition-enter-to {
+	width: theme(aside_width);
+}
+.logoTransition-leave-active {
+	transition: all 0.3s;
+}
+
+.logoTransition-leave-from {
+	width: theme(aside_width);
+}
+.logoTransition-leave-to {
+	width: 64px;
+}

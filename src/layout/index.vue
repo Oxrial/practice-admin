@@ -8,15 +8,19 @@
 				<Header v-model:is-collapse="isCollapse" />
 			</el-header>
 			<el-main>
-				<router-view />
+				<router-view v-slot="{ Component, route }">
+					<keep-alive>
+						<component :is="Component" :key="route.fullPath" />
+					</keep-alive>
+				</router-view>
 			</el-main>
 		</el-container>
 	</el-container>
 </template>
 
 <script setup lang="ts">
-import Menu from './Menu/index.vue'
-import Header from './Header/index.vue'
+import Menu from './components/Menu/index.vue'
+import Header from './components/Header/index.vue'
 
 const isCollapse = ref(false)
 </script>

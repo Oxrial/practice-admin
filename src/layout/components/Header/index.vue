@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import BreadCrumb from './components/Breadcrumb/index.vue'
+import BreadCrumb from './Breadcrumb/index.vue'
 const props = defineProps({
 	isCollapse: {
 		type: Boolean,

@@ -1,11 +1,15 @@
 <template>
-	<el-affix>
-		<el-image
-			:src="!isCollapse ? logo : logo2"
-			fit="contain"
-			class="affix-logo"
-		/>
-	</el-affix>
+	<div class="logo-main">
+		<transition name="logoTransition" :appear="true">
+			<el-image
+				v-if="!isCollapse"
+				:src="logo"
+				fit="contain"
+				class="project-logo"
+			/>
+			<el-image v-else :src="logo2" fit="contain" class="project-logo" />
+		</transition>
+	</div>
 	<el-scrollbar class="submenu-main">
 		<el-menu
 			router
@@ -23,8 +27,8 @@
 <script setup lang="ts">
 import logo from '@/assets/logo-cool.jpg'
 import logo2 from '@/assets/logo.png'
-import subMenu from './components/Submenu/index.vue'
-import { useRouter, useRoute } from 'vue-router'
+import subMenu from './Submenu/index.vue'
+import { useRoute } from 'vue-router'
 import { routesObj } from '@/router'
 import scss from '@/assets/style.module.scss'
 
