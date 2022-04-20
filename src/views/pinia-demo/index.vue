@@ -21,6 +21,7 @@
 
 <script setup lang="ts">
 import { useTestStore } from '@/store'
+import { ElNotification } from 'element-plus'
 import { storeToRefs } from 'pinia'
 const Test = useTestStore()
 const changeTest1 = () => Test.number++
@@ -37,9 +38,37 @@ const changeTest6 = () => Test.$reset()
 const { name, number } = storeToRefs(Test)
 
 // 当内容更新提交值时触发
-Test.$subscribe((args, state) => {
-	console.log(args, state)
-})
+Test.$subscribe(
+	(args, state) => {
+		console.log(111)
+
+		ElNotification({
+			title: 'args',
+			message: JSON.stringify(args),
+			position: 'bottom-right'
+		})
+		nextTick(() =>
+			ElNotification({
+				title: 'state',
+				message: JSON.stringify(state),
+				position: 'bottom-right'
+			})
+		)
+	},
+	{
+		detached: true,
+		deep: true,
+		flush: 'post'
+	}
+)
+// 监听action中的方法，调用时执行，异步
+Test.$onAction(
+	() => {
+		console.log(222)
+	},
+	// detached组件销毁后继续监听
+	true
+)
 </script>
 
 <style scoped lang="scss"></style>

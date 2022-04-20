@@ -29,25 +29,25 @@ export const routesObj = [
 		component: () => import('@/views/home/index.vue'),
 		meta: { title: '首页', icon: 'el-icon-house' }
 	},
-	// 在菜单展示按钮，仅重定向用
+	// 在菜单展示按钮，仅重定向用，无需next()放行
 	{
 		path: '/new',
-		redirect: '/new/index',
-		meta: { title: '新标签', icon: 'el-icon-house' }
-	},
-	// 新窗口路由
-	{
-		path: '/new/index',
-		component: () => import('@/views/new-tab/index.vue'),
-		meta: { notLayout: true, title: '新标签', icon: 'el-icon-house' },
+		component: () => import('@/views/index.vue'),
+		meta: { title: '新标签', icon: 'el-icon-eleme' },
 		beforeEnter: (
 			to: RouteLocationNormalized,
 			from: RouteLocationNormalizedLoaded,
 			next: NavigationGuardNext
 		) => {
-			console.log(to, from, next)
-			window.open(to.fullPath, '_blank')
+			window.open(to.fullPath + '/index', '_blank')
+			next(from.fullPath)
 		}
+	},
+	// 新窗口路由
+	{
+		path: '/new/index',
+		component: () => import('@/views/new-tab/index.vue'),
+		meta: { notLayout: true, title: '新标签', icon: 'el-icon-house' }
 	},
 	{
 		path: '/test',
