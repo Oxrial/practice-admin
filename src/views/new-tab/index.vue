@@ -150,17 +150,20 @@ const enterCancel = (el: Element) => {
 			}
 			.item-style-1 {
 				border: 15px transparent solid;
-				border-image-source: url('@/assets/border-image1.png');
-				border-image-slice: 165;
-				border-image-width: 15px;
-				border-image-repeat: round;
+				border-image: url('@/assets/border-image1.png') 165 / 15px round;
+				// border-image-source: url('@/assets/border-image1.png');
+				// border-image-slice: 165;
+				// border-image-width: 15px;
+				// border-image-repeat: round;
 			}
 			.item-style-2 {
 				border: 15px transparent solid;
-				border-image-source: url('@/assets/border-image2.png');
-				border-image-slice: 51 38 20 132;
-				border-image-width: 51px 38px 20px 132px;
-				border-image-repeat: round;
+				border-image: url('@/assets/border-image2.png') 51 38 20 132 /51px 38px 20px
+					132px round;
+				// border-image-source: url('@/assets/border-image2.png');
+				// border-image-slice: 51 38 20 132;
+				// border-image-width: 51px 38px 20px 132px;
+				// border-image-repeat: round;
 			}
 			.transition-main {
 				:deep(.el-card__body) {
