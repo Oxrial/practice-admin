@@ -1,4 +1,11 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import {
+	createRouter,
+	createWebHistory,
+	NavigationGuardNext,
+	RouteLocationNormalized,
+	RouteLocationNormalizedLoaded,
+	RouteRecordRaw
+} from 'vue-router'
 import Layout from '@/layout/index.vue'
 export const routesObj = [
 	{
@@ -21,6 +28,26 @@ export const routesObj = [
 		path: '/home',
 		component: () => import('@/views/home/index.vue'),
 		meta: { title: '首页', icon: 'el-icon-house' }
+	},
+	// 在菜单展示按钮，仅重定向用
+	{
+		path: '/new',
+		redirect: '/new/index',
+		meta: { title: '新标签', icon: 'el-icon-house' }
+	},
+	// 新窗口路由
+	{
+		path: '/new/index',
+		component: () => import('@/views/new-tab/index.vue'),
+		meta: { notLayout: true, title: '新标签', icon: 'el-icon-house' },
+		beforeEnter: (
+			to: RouteLocationNormalized,
+			from: RouteLocationNormalizedLoaded,
+			next: NavigationGuardNext
+		) => {
+			console.log(to, from, next)
+			window.open(to.fullPath, '_blank')
+		}
 	},
 	{
 		path: '/test',
@@ -62,7 +89,7 @@ export const routesObj = [
 		]
 	}
 ]
-const routess: Array<RouteRecordRaw> = []
+const routes: Array<RouteRecordRaw> = []
 const itemObj: RouteRecordRaw = {
 	path: '',
 	redirect: '/home',
@@ -76,13 +103,13 @@ routesObj.forEach((item: RouteRecordRaw) => {
 		}
 		itemObj.children!.push(item as RouteRecordRaw)
 	} else {
-		routess.push(item as RouteRecordRaw)
+		routes.push(item as RouteRecordRaw)
 	}
 })
-routess.push(itemObj as RouteRecordRaw)
+routes.push(itemObj as RouteRecordRaw)
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
-	routes: routess
+	routes
 })
 export default router

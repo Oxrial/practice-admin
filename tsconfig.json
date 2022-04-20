@@ -6,6 +6,8 @@
 		"module": "esnext",
 		"moduleResolution": "node",
 		"strict": true,
+		// 不允许隐式声明any
+		// "noImplicitAny": true,
 		"jsx": "preserve",
 		"jsxFactory": "h",
 		"jsxFragmentFactory": "Fragment",
@@ -17,6 +19,7 @@
 		"baseUrl": ".",
 		"paths": { "@/*": ["src/*"] }
 	},
+	// 要编译的文件匹配 还有 "files"属性
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
