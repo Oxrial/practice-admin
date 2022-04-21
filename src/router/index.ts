@@ -66,6 +66,7 @@ export const routesObj = [
 			} else {
 				open(tabs, fullPath, name)
 			}
+			next(from.fullPath)
 		}
 	},
 	// 新窗口路由
