@@ -69,6 +69,10 @@ Test.$onAction(
 	// detached组件销毁后继续监听
 	true
 )
+
+onMounted(() => {
+	console.log(1222221)
+})
 </script>
 
 <style scoped lang="scss"></style>

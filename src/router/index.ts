@@ -14,7 +14,7 @@ const open = (tabs: Ref, fullPath: string, name: string) => {
 	const instance = window.open(fullPath, name) as Window
 	tabs.value.push({ instance, name })
 }
-export const routesObj = [
+export const routesObj: Array<RouteRecordRaw> = [
 	{
 		path: '/:pathMatch(.*)',
 		redirect: '/404',
@@ -48,24 +48,35 @@ export const routesObj = [
 			from: RouteLocationNormalizedLoaded,
 			next: NavigationGuardNext
 		) => {
+			// pinia windowtab实例
 			const windowTab = useWindowTabsStore()
+			// 拼接新标签全路径
 			const fullPath = to.fullPath + '/index'
+			// 新标签页name：window窗口实例名，pinia存储依据
 			const name = (to.fullPath.substring(1) + 'index').toUpperCase()
+			// 根据name查找pinia实例中是否存在相关数据
 			const windowInstance = windowTab.getWinTabByName(name)
+			// 解构pinia实例
 			const { tabs } = storeToRefs(windowTab)
+			// pinia中存在数据
 			if (windowInstance) {
+				// pinia获取的window实例状态为非关闭状态，则聚焦
 				if (!windowInstance.instance.closed) {
 					windowInstance.instance.focus()
 				} else {
+					// pinia获取的window实例状态为关闭状态，清除pinia该条数据
 					tabs.value.splice(
 						tabs.value.findIndex((item) => (item!.name = windowInstance.name)),
 						1
 					)
+					// 重新新开窗口
 					open(tabs, fullPath, name)
 				}
 			} else {
+				// 新开窗口
 				open(tabs, fullPath, name)
 			}
+			// 不作路由跳转，保持原路由
 			next(from.fullPath)
 		}
 	},

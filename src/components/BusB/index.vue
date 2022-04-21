@@ -11,7 +11,6 @@ let flag = ref(false)
 Bus.on('on-click', (val: boolean) => {
 	flag.value = val
 })
-console.log(Bus)
 </script>
 
 <style scoped lang="scss"></style>
