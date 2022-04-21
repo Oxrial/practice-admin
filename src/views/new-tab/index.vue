@@ -33,7 +33,7 @@
 							@click="flag = !flag"
 							plain
 						>
-							Trigger
+							Trigger With Transition
 						</el-button>
 						<span>
 							Transition 触发情况： 条件渲染 (使用 v-if)/ 条件展示 (使用
@@ -51,18 +51,13 @@
 							不等矩形边框切割
 						</div>
 					</transition>
-					<transition
-						enter-active-class="animate__animated animate__rubberBand"
-						leave-active-class="animate__animated animate__wobble"
+					<div
+						:class="`tab-item center-bold item-style-${
+							flag ? 1 : 2
+						} transition-demo animate__animated animate__rubberBand`"
 					>
-						<div
-							:class="`tab-item center-bold item-style-${
-								flag ? 1 : 2
-							} transition-demo`"
-						>
-							不等矩形边框切割
-						</div>
-					</transition>
+						{{ flag ? '正方' : '不等矩' }}形边框切割
+					</div>
 				</el-card>
 			</el-col>
 		</el-row>
@@ -71,13 +66,30 @@
 				<el-card class="tab-item item-style-0 transition-main">
 					<template #header>
 						Gsap.js 动画库
-
 						<el-button
 							class="tab-item tab-color-hover"
 							@click="flag2 = !flag2"
 							plain
 						>
-							Trigger
+							[{{ flag2 }}] Trigger With Transition
+						</el-button>
+						<el-button class="tab-item tab-color-hover" @click="enterToPlay">
+							Trigger With Method To
+						</el-button>
+						<el-button class="tab-item tab-color-hover" @click="enterFromPlay">
+							Trigger With Method From
+						</el-button>
+						执行动画后，若再次执行其他动画，将以当前状态进行再动画,to
+						仅可执行一次
+						<el-button
+							class="tab-item tab-color-hover"
+							:disabled="disabled"
+							@click="enterTimeLinePlay"
+						>
+							Trigger With Method Timeline
+						</el-button>
+						<el-button class="tab-item tab-color-hover" @click="setGsap">
+							Reset
 						</el-button>
 					</template>
 					<transition
@@ -88,11 +100,17 @@
 					>
 						<div
 							v-if="flag2"
-							class="tab-item center-bold item-style-2 transition-demo"
+							class="tab-item center-bold item-style-1 transition-demo"
 						>
-							不等矩形边框切割
+							正方形边框切割
 						</div>
 					</transition>
+					<div
+						id="gsap-transition"
+						class="tab-item center-bold item-style-2 transition-demo"
+					>
+						不等矩形边框切割
+					</div>
 				</el-card>
 			</el-col>
 		</el-row>
@@ -104,6 +122,67 @@ import 'animate.css'
 import gsap from 'gsap'
 const flag = ref(true)
 const flag2 = ref(true)
+
+const setGsap = () => {
+	// 设定gsap元素初始定义，例transformOrigin设定动画以中心为基准，例如旋转等的中心
+	gsap.set('#gsap-transition', {
+		x: 0,
+		rotateY: 180,
+		transformOrigin: 'center'
+	})
+}
+onMounted(() => {
+	setGsap()
+})
+const enterFromPlay = () => {
+	// 从到某状态from到当前状态
+	gsap.from('#gsap-transition', {
+		x: 200,
+		rotateX: 160,
+		rotateY: 50
+		// repeat: -1, //重复次数，-1 :无限
+		// yoyo: true // 如果true，动画的循环是倒序 需要配合repeat属性
+	})
+}
+const enterToPlay = () => {
+	// 从当前状态开始to到某状态
+	gsap.to('#gsap-transition', {
+		x: 200,
+		rotateX: 360,
+		rotateY: 0
+		// repeat: -1, //重复次数，-1 :无限
+		// yoyo: true // 如果true，动画的循环是倒序 需要配合repeat属性
+	})
+}
+const disabled = ref(false)
+// 时间线动画链式，依照链式顺序同步执行
+const enterTimeLinePlay = async () => {
+	disabled.value = true
+	await gsap
+		.timeline()
+		.to('#gsap-transition', {
+			x: 200,
+			rotateX: 360,
+			rotateY: 0
+			// repeat: -1, //重复次数，-1 :无限
+			// yoyo: true // 如果true，动画的循环是倒序 需要配合repeat属性
+		})
+		.from(
+			'#gsap-transition',
+			{
+				x: 200,
+				rotateX: 160,
+				rotateY: 50
+				// repeat: -1, //重复次数，-1 :无限
+				// yoyo: true // 如果true，动画的循环是倒序 需要配合repeat属性
+			},
+			// 距上一个动画后的时间差,<上一个动画开始的时间点，>上一个动画结束的时间点，+：之后，例0.5，0.5后；-：之前，例-0.5，提前0.5
+			'>0.5'
+		)
+
+	disabled.value = false
+}
+
 const enterFrom = (el: Element) => {
 	// 进入之前
 	gsap.set(el, { x: 0 })
@@ -140,6 +219,9 @@ const enterCancel = (el: Element) => {
 			}
 			.tab-color-hover:hover {
 				color: skyblue;
+			}
+			.tab-color-hover.el-button.is-disabled {
+				color: #95959e;
 			}
 			.center-bold {
 				text-align: center;

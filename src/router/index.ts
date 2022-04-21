@@ -1,3 +1,4 @@
+import { useWindowTabsStore } from '@/store'
 import {
 	createRouter,
 	createWebHistory,
@@ -7,6 +8,12 @@ import {
 	RouteRecordRaw
 } from 'vue-router'
 import Layout from '@/layout/index.vue'
+import { storeToRefs } from 'pinia'
+import { Ref } from 'vue'
+const open = (tabs: Ref, fullPath: string, name: string) => {
+	const instance = window.open(fullPath, name) as Window
+	tabs.value.push({ instance, name })
+}
 export const routesObj = [
 	{
 		path: '/:pathMatch(.*)',
@@ -26,12 +33,14 @@ export const routesObj = [
 	},
 	{
 		path: '/home',
+		name: 'Home',
 		component: () => import('@/views/home/index.vue'),
 		meta: { title: '首页', icon: 'el-icon-house' }
 	},
 	// 在菜单展示按钮，仅重定向用，无需next()放行
 	{
 		path: '/new',
+		name: 'New',
 		component: () => import('@/views/index.vue'),
 		meta: { title: '新标签', icon: 'el-icon-eleme' },
 		beforeEnter: (
@@ -39,38 +48,60 @@ export const routesObj = [
 			from: RouteLocationNormalizedLoaded,
 			next: NavigationGuardNext
 		) => {
-			window.open(to.fullPath + '/index', '_blank')
-			next(from.fullPath)
+			const windowTab = useWindowTabsStore()
+			const fullPath = to.fullPath + '/index'
+			const name = (to.fullPath.substring(1) + 'index').toUpperCase()
+			const windowInstance = windowTab.getWinTabByName(name)
+			const { tabs } = storeToRefs(windowTab)
+			if (windowInstance) {
+				if (!windowInstance.instance.closed) {
+					windowInstance.instance.focus()
+				} else {
+					tabs.value.splice(
+						tabs.value.findIndex((item) => (item!.name = windowInstance.name)),
+						1
+					)
+					open(tabs, fullPath, name)
+				}
+			} else {
+				open(tabs, fullPath, name)
+			}
 		}
 	},
 	// 新窗口路由
 	{
 		path: '/new/index',
+		name: 'NewIndex',
 		component: () => import('@/views/new-tab/index.vue'),
 		meta: { notLayout: true, title: '新标签', icon: 'el-icon-house' }
 	},
 	{
 		path: '/test',
+		name: 'Test',
 		meta: { title: '测试', icon: 'el-icon-eleme' },
 		component: () => import('@/views/index.vue'),
 		children: [
 			{
 				path: 'shuffle',
+				name: 'TestShuffle',
 				component: () => import('@/views/shuffle/index.vue'),
 				meta: { title: '随机', icon: 'el-icon-eleme' }
 			},
 			{
 				path: 'curry',
+				name: 'TestCurry',
 				component: () => import('@/views/curry-function/index.vue'),
 				meta: { title: '柯里化', icon: 'el-icon-eleme' }
 			},
 			{
 				path: 'bus',
+				name: 'TestBus',
 				component: () => import('@/views/bus-demo/index.vue'),
 				meta: { title: '公共串行BUS', icon: 'el-icon-eleme' }
 			},
 			{
 				path: 'pinia',
+				name: 'TestPinia',
 				component: () => import('@/views/pinia-demo/index.vue'),
 				meta: { title: 'Pinia', icon: 'el-icon-eleme' }
 			}
@@ -78,11 +109,13 @@ export const routesObj = [
 	},
 	{
 		path: '/components',
+		name: 'Components',
 		meta: { title: '组件', icon: 'el-icon-eleme' },
 		component: () => import('@/views/index.vue'),
 		children: [
 			{
 				path: 'pagination',
+				name: 'ComponentsPagination',
 				component: () => import('@/components/Pagination/demo.vue'),
 				meta: { title: '分页', icon: 'el-icon-documentcopy' }
 			}

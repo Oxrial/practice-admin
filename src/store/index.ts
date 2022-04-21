@@ -20,3 +20,25 @@ export const useTestStore = defineStore('TEST', {
 		}
 	}
 })
+type _winTab = {
+	instance: Window
+	name: string
+}
+type winTab = _winTab | undefined
+export const useWindowTabsStore = defineStore('WINDOWTABS', {
+	state: () => {
+		return {
+			tabs: [] as winTab[]
+		}
+	},
+	getters: {
+		getWindowTabs(): Array<winTab> {
+			return this.tabs
+		}
+	},
+	actions: {
+		getWinTabByName(name: string): winTab {
+			return this.tabs.find((item) => name === item!.name)
+		}
+	}
+})
