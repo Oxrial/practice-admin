@@ -15,6 +15,7 @@
 	</el-card>
 	<el-card>
 		GETTER
+		注：getter方法中的参数不接受任何自定义参数，默认参数的类型即仅有其state
 		<div>getter方法调用: {{ Test.getName }}</div>
 	</el-card>
 </template>
@@ -69,10 +70,6 @@ Test.$onAction(
 	// detached组件销毁后继续监听
 	true
 )
-
-onMounted(() => {
-	console.log(1222221)
-})
 </script>
 
 <style scoped lang="scss"></style>

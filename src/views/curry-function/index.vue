@@ -53,10 +53,8 @@ const strAdd = function (...args) {
 const curryStrAdd = (a) => (b) => a + ',' + b
 onMounted(() => {
 	curry()
-
-	console.log(strAdd('1-1').toString()) // 1-1
-	console.log(curryStrAdd('1-1')('1-2')) // 1-1,1-2
-	console.log('->>>>>>>>>.')
+	// console.log(strAdd('1-1').toString()) // 1-1
+	// console.log(curryStrAdd('1-1')('1-2')) // 1-1,1-2
 })
 </script>
 

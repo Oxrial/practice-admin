@@ -1,0 +1,40 @@
+.animate-gsap {
+	margin: 20px;
+	// :deep(.el-card__body) {
+	section {
+		position: relative;
+		height: calc(100vh - 150px);
+		display: flex;
+		justify-self: center;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		h1 {
+			font-size: xxx-large;
+		}
+	}
+	.readme-main {
+		position: relative;
+		height: calc(100vh - 150px);
+		padding: 100px;
+		h2 {
+			text-align: right;
+			padding: 200px 100px;
+		}
+		.tec-tag {
+			padding: 20px;
+			// margin-right: 20px;
+			.el-tag__content {
+				font-size: x-large;
+			}
+		}
+	}
+	.animate-end {
+		position: relative;
+		height: calc(100vh - 150px);
+		h2 {
+			padding-bottom: 200px;
+		}
+	}
+	// }
+}

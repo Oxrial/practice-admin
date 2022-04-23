@@ -19,7 +19,7 @@
 			text-color="#fefefea6"
 			class="el-menu-vertical-demo"
 		>
-			<sub-menu :menu-data="(routesObj as any[])" />
+			<sub-menu :menu-data="(routes as any[])" />
 		</el-menu>
 	</el-scrollbar>
 </template>
@@ -28,8 +28,8 @@
 import logo from '@/assets/logo-cool.jpg'
 import logo2 from '@/assets/logo.png'
 import subMenu from './Submenu/index.vue'
-import { useRoute } from 'vue-router'
-import { routesObj } from '@/router'
+import { useRouter,useRoute } from 'vue-router'
+// import { routesObj } from '@/router'
 import scss from '@/assets/style.module.scss'
 
 const props = defineProps({
@@ -38,10 +38,10 @@ const props = defineProps({
 		default: false
 	}
 })
-// const $routes = useRouter()
-// const routes = computed(() => {
-// 	return $routes.options.routes
-// })
+const $routes = useRouter()
+const routes = computed(() => {
+	return $routes.options.routes
+})
 
 const $route = useRoute()
 const route = computed(() => {

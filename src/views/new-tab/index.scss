@@ -1,0 +1,66 @@
+.new-tab {
+	background-color: theme(aside_theme);
+	width: 100vw;
+	height: 100vh;
+	* {
+		color: #fff;
+	}
+	.el-row {
+		margin-bottom: 20px;
+		.el-col {
+			.tab-item {
+				background-color: transparent;
+			}
+			.tab-color-hover:hover {
+				color: skyblue;
+			}
+			.tab-color-hover.el-button.is-disabled {
+				color: #95959e;
+			}
+			.center-bold {
+				text-align: center;
+				font-weight: bold;
+			}
+			.item-style-0 {
+				margin: 20px;
+			}
+			.item-style-1 {
+				border: 15px transparent solid;
+				border-image: url('@/assets/border-image1.png') 165 / 15px round;
+				// border-image-source: url('@/assets/border-image1.png');
+				// border-image-slice: 165;
+				// border-image-width: 15px;
+				// border-image-repeat: round;
+			}
+			.item-style-2 {
+				border: 15px transparent solid;
+				border-image: url('@/assets/border-image2.png') 51 38 20 132 /51px 38px 20px
+					132px round;
+				// border-image-source: url('@/assets/border-image2.png');
+				// border-image-slice: 51 38 20 132;
+				// border-image-width: 51px 38px 20px 132px;
+				// border-image-repeat: round;
+			}
+			.transition-main {
+				:deep(.el-card__body) {
+					display: flex;
+					justify-content: space-evenly;
+					.transition-demo {
+						width: 20%;
+						padding: 20px;
+					}
+				}
+			}
+			.ranking_roll {
+				max-height: 200px;
+				overflow: hidden;
+				.Interface {
+					background-color: rgba(84, 82, 224, 0.3);
+				}
+				#wrapper {
+					transition: all 3s;
+				}
+			}
+		}
+	}
+}

@@ -1,4 +1,3 @@
-import { useWindowTabsStore } from '@/store'
 import {
 	createRouter,
 	createWebHistory,
@@ -7,14 +6,22 @@ import {
 	RouteLocationNormalizedLoaded,
 	RouteRecordRaw
 } from 'vue-router'
+
 import Layout from '@/layout/index.vue'
+import { useWindowTabsStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { Ref } from 'vue'
+import { capitalize } from 'lodash-es'
 const open = (tabs: Ref, fullPath: string, name: string) => {
 	const instance = window.open(fullPath, name) as Window
 	tabs.value.push({ instance, name })
 }
-export const routesObj: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
+	{
+		path: '/',
+		redirect: '/login',
+		meta: { notLayout: true }
+	},
 	{
 		path: '/:pathMatch(.*)',
 		redirect: '/404',
@@ -27,21 +34,34 @@ export const routesObj: Array<RouteRecordRaw> = [
 		meta: { notLayout: true }
 	},
 	{
-		path: '/',
-		redirect: '/home',
+		path: '/login',
+		name: 'Login',
+		component: () => import('@/views/login/index.vue'),
 		meta: { notLayout: true }
+	},
+	// 新窗口路由
+	{
+		path: '/new/index',
+		name: 'NewIndex',
+		component: () => import('@/views/new-tab/index.vue'),
+		meta: { notLayout: true, title: '新标签', icon: 'el-icon-house' }
 	},
 	{
 		path: '/home',
-		name: 'Home',
-		component: () => import('@/views/home/index.vue'),
-		meta: { title: '首页', icon: 'el-icon-house' }
+		component: Layout,
+		redirect: '/home/index',
+		meta: { title: '首页', icon: 'el-icon-house' },
+		children: [
+			{
+				path: 'index',
+				component: () => import('@/views/home/index.vue')
+			}
+		]
 	},
 	// 在菜单展示按钮，仅重定向用，无需next()放行
 	{
 		path: '/new',
-		name: 'New',
-		component: () => import('@/views/index.vue'),
+		component: Layout,
 		meta: { title: '新标签', icon: 'el-icon-eleme' },
 		beforeEnter: (
 			to: RouteLocationNormalized,
@@ -80,40 +100,28 @@ export const routesObj: Array<RouteRecordRaw> = [
 			next(from.fullPath)
 		}
 	},
-	// 新窗口路由
-	{
-		path: '/new/index',
-		name: 'NewIndex',
-		component: () => import('@/views/new-tab/index.vue'),
-		meta: { notLayout: true, title: '新标签', icon: 'el-icon-house' }
-	},
 	{
 		path: '/test',
-		name: 'Test',
-		meta: { title: '测试', icon: 'el-icon-eleme' },
-		component: () => import('@/views/index.vue'),
+		meta: { type: 'sub', title: '测试', icon: 'el-icon-eleme' },
+		component: Layout,
 		children: [
 			{
 				path: 'shuffle',
-				name: 'TestShuffle',
 				component: () => import('@/views/shuffle/index.vue'),
 				meta: { title: '随机', icon: 'el-icon-eleme' }
 			},
 			{
 				path: 'curry',
-				name: 'TestCurry',
 				component: () => import('@/views/curry-function/index.vue'),
 				meta: { title: '柯里化', icon: 'el-icon-eleme' }
 			},
 			{
 				path: 'bus',
-				name: 'TestBus',
 				component: () => import('@/views/bus-demo/index.vue'),
 				meta: { title: '公共串行BUS', icon: 'el-icon-eleme' }
 			},
 			{
 				path: 'pinia',
-				name: 'TestPinia',
 				component: () => import('@/views/pinia-demo/index.vue'),
 				meta: { title: 'Pinia', icon: 'el-icon-eleme' }
 			}
@@ -121,37 +129,33 @@ export const routesObj: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/components',
-		name: 'Components',
-		meta: { title: '组件', icon: 'el-icon-eleme' },
-		component: () => import('@/views/index.vue'),
+		meta: { type: 'sub', title: '组件', icon: 'el-icon-eleme' },
+		component: Layout,
 		children: [
 			{
 				path: 'pagination',
-				name: 'ComponentsPagination',
 				component: () => import('@/components/Pagination/demo.vue'),
 				meta: { title: '分页', icon: 'el-icon-documentcopy' }
 			}
 		]
 	}
 ]
-const routes: Array<RouteRecordRaw> = []
-const itemObj: RouteRecordRaw = {
-	path: '',
-	redirect: '/home',
-	component: Layout,
-	children: []
-}
-routesObj.forEach((item: RouteRecordRaw) => {
-	if (!item.meta?.notLayout) {
-		if (item.children) {
-			item.redirect = item.path + '/' + item.children[0].path
+const recursionRoutesArr = (
+	routesArrTemp: Array<RouteRecordRaw>,
+	parentsPath: string = ''
+) => {
+	routesArrTemp.forEach((item: RouteRecordRaw) => {
+		if (!item.meta?.notLayout) {
+			item.name =
+				capitalize(parentsPath.substring(parentsPath.indexOf('/') + 1)) +
+				capitalize(item.path.substring(item.path.indexOf('/') + 1))
+			if (item.children) {
+				recursionRoutesArr(item.children, item.path)
+			}
 		}
-		itemObj.children!.push(item as RouteRecordRaw)
-	} else {
-		routes.push(item as RouteRecordRaw)
-	}
-})
-routes.push(itemObj as RouteRecordRaw)
+	})
+}
+recursionRoutesArr(routes)
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),

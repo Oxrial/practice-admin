@@ -33,7 +33,8 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { FormInstance } from 'element-plus'
+import { FormInstance, ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
 
 const ruleFormRef = ref<FormInstance>()
 
@@ -76,9 +77,9 @@ const validatePass2 = (rule: any, value: any, callback: any) => {
 }
 
 const ruleForm = reactive({
-	pass: '',
-	checkPass: '',
-	age: ''
+	pass: '123456',
+	checkPass: '123456',
+	age: 18
 })
 
 const rules = reactive({
@@ -87,11 +88,17 @@ const rules = reactive({
 	age: [{ validator: checkAge, trigger: 'blur' }]
 })
 
+const router = useRouter()
 const submitForm = (formEl: FormInstance | undefined) => {
 	if (!formEl) return
 	formEl.validate((valid) => {
 		if (valid) {
 			console.log('提交!')
+			ElMessage({
+				message: '登录成功，正在跳转至首页...',
+				type: 'success'
+			})
+			router.push('/home')
 		} else {
 			console.log('提交失败!')
 			return false
@@ -104,13 +111,6 @@ const resetForm = (formEl: FormInstance | undefined) => {
 	formEl.resetFields()
 }
 </script>
-<style scoped>
-.login-main {
-	width: 50vh;
-	height: 100vh;
-	margin: 0 auto;
-	display: flex;
-	align-items: center;
-	background-color: pink;
-}
+<style scoped lang="scss">
+@import './index.scss';
 </style>

@@ -114,6 +114,45 @@
 				</el-card>
 			</el-col>
 		</el-row>
+		<el-row>
+			<el-col :span="12">
+				<el-card class="tab-item item-style-0">
+					<template #header> 自动轮播滚动 </template>
+					<div class="left_chart_wrap chart_box b_img_ranking">
+						<div class="common_header">实时接口风险</div>
+						<div class="ranking_wrap ranking_roll" id="wrapper">
+							<div id="list_one">
+								<el-row
+									class="Interface"
+									v-for="(item, index) in dataMap.list"
+									:key="index"
+								>
+									<el-col :span="15" :offset="2">
+										<el-row class="Interface_padding">
+											<el-col :span="12">{{ item.name }}</el-col>
+											<el-col :span="12" class="Interface_date">{{
+												item.date
+											}}</el-col>
+										</el-row>
+										<el-row>
+											<el-col :span="24" class="Interface_text">{{
+												item.text
+											}}</el-col>
+										</el-row>
+									</el-col>
+									<el-col :span="1" :offset="1">11</el-col>
+								</el-row>
+							</div>
+							<div id="list_two"></div>
+						</div>
+					</div>
+				</el-card>
+			</el-col>
+
+			<el-col :span="6">
+				<el-card class="tab-item item-style-0"> </el-card>
+			</el-col>
+		</el-row>
 	</el-scrollbar>
 </template>
 
@@ -200,64 +239,67 @@ const enterTo = (el: Element) => {
 const enterCancel = (el: Element) => {
 	// 过度打断
 }
+
+const dataMap = reactive({
+	list: [
+		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
+		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' }
+	]
+})
+const scroll = () => {
+	let speed = 100
+	let wrapper = document.getElementById('wrapper')
+	let list_one = document.getElementById('list_one')
+	let list_two = document.getElementById('list_two')
+	list_two!.innerHTML = list_one!.innerHTML
+	console.log(list_one!.innerHTML)
+	function Marquee() {
+		if (list_two!.offsetHeight - wrapper!.scrollTop <= 0)
+			wrapper!.scrollTop -= list_one!.offsetHeight
+		else {
+			wrapper!.scrollTop += 3
+		}
+	}
+	let MyMar = setInterval(Marquee, speed)
+	wrapper!.onmouseover = function () {
+		clearInterval(MyMar)
+	}
+	wrapper!.onmouseout = function () {
+		MyMar = setInterval(Marquee, speed)
+	}
+}
+onMounted(() => {
+	scroll()
+})
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/style.module.scss';
-.new-tab {
-	background-color: theme(aside_theme);
-	width: 100vw;
-	height: 100vh;
-	* {
-		color: #fff;
-	}
-	.el-row {
-		margin-bottom: 20px;
-		.el-col {
-			.tab-item {
-				background-color: transparent;
-			}
-			.tab-color-hover:hover {
-				color: skyblue;
-			}
-			.tab-color-hover.el-button.is-disabled {
-				color: #95959e;
-			}
-			.center-bold {
-				text-align: center;
-				font-weight: bold;
-			}
-			.item-style-0 {
-				margin: 20px;
-			}
-			.item-style-1 {
-				border: 15px transparent solid;
-				border-image: url('@/assets/border-image1.png') 165 / 15px round;
-				// border-image-source: url('@/assets/border-image1.png');
-				// border-image-slice: 165;
-				// border-image-width: 15px;
-				// border-image-repeat: round;
-			}
-			.item-style-2 {
-				border: 15px transparent solid;
-				border-image: url('@/assets/border-image2.png') 51 38 20 132 /51px 38px 20px
-					132px round;
-				// border-image-source: url('@/assets/border-image2.png');
-				// border-image-slice: 51 38 20 132;
-				// border-image-width: 51px 38px 20px 132px;
-				// border-image-repeat: round;
-			}
-			.transition-main {
-				:deep(.el-card__body) {
-					display: flex;
-					justify-content: space-evenly;
-					.transition-demo {
-						width: 20%;
-						padding: 20px;
-					}
-				}
-			}
-		}
-	}
-}
+@import './index.scss';
 </style>

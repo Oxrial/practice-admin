@@ -8,13 +8,11 @@
 				<Header v-model:is-collapse="isCollapse" />
 			</el-header>
 			<el-main>
-				<div class="home-main">
-					<router-view v-slot="{ Component, route }">
-						<keep-alive>
-							<component :is="Component" :key="route.fullPath" />
-						</keep-alive>
-					</router-view>
-				</div>
+				<router-view v-slot="{ Component, route }">
+					<keep-alive>
+						<component :is="Component" :key="route.fullPath" />
+					</keep-alive>
+				</router-view>
 			</el-main>
 		</el-container>
 	</el-container>
@@ -28,8 +26,4 @@ const isCollapse = ref(false)
 </script>
 <style scoped lang="scss">
 @import './index.scss';
-
-.home-main {
-	margin: 20px;
-}
 </style>

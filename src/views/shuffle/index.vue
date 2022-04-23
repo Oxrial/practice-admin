@@ -28,26 +28,7 @@ const list = ref(
 		}
 	})
 )
-onMounted(() => {})
 </script>
 <style scoped lang="scss">
-.wraps {
-	display: flex;
-	flex-wrap: wrap;
-	width: calc(25px * 9 + 18px);
-	margin: 0 auto;
-	.wraps-item {
-		width: 25px;
-		height: 25px;
-		color: #fff;
-		background: rgb(154, 167, 240);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		border-radius: 15px;
-	}
-}
-.wraps-move {
-	transition: all 1s ease;
-}
+@import './index.scss';
 </style>

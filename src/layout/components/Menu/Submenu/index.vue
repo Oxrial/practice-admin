@@ -1,24 +1,28 @@
 <template>
 	<template v-for="menu in menuData">
 		<template v-if="!menu.meta?.notLayout">
-			<template v-if="menu.children?.length">
+			<template v-if="menu.meta?.type === 'sub'">
 				<el-sub-menu
 					:index="(parentsPath ? parentsPath + '/' : '') + menu.path"
 				>
 					<template #title>
-						<menu-title :menu="menu"></menu-title>
+						<menu-title :menu="menu" />
 					</template>
 					<sub-menu
 						:menu-data="menu.children"
 						:parents-path="(parentsPath ? parentsPath + '/' : '') + menu.path"
-					></sub-menu>
+					/>
 				</el-sub-menu>
 			</template>
 			<template v-else>
 				<el-menu-item
-					:index="(parentsPath ? parentsPath + '/' : '') + menu.path"
+					:index="
+						(parentsPath ? parentsPath + '/' : '') +
+						menu.path +
+						(menu.children ? '/' + menu.children[0].path : '')
+					"
 				>
-					<menu-title :menu="menu"></menu-title>
+					<menu-title :menu="menu" />
 				</el-menu-item>
 			</template>
 		</template>
