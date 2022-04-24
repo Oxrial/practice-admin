@@ -12,9 +12,7 @@
 type Prop = {
 	matched: Array<any>
 }
-
 const props = defineProps<Prop>()
-console.log(props.matched)
 </script>
 
 <style scoped lang="scss"></style>
