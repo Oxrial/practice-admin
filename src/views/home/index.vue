@@ -67,7 +67,7 @@ const animateStart = () => {
 			}
 		})
 		.from('.animate-start h2', { y: innerHeight * 2 })
-		.from('.animate-start .animate-start-icon', { y: innerHeight * -1 })
+		.from('.animate-start .animate-start-icon', { y: innerHeight * -3 })
 
 	gsap
 		.timeline({
@@ -90,8 +90,8 @@ const animateStart = () => {
 		.timeline({
 			scrollTrigger: {
 				trigger: '.animate-end',
-				start: '20% 50%',
-				end: '20% 20%',
+				start: '0% 50%',
+				end: '0% 20%',
 				markers: false,
 				scroller: '.el-main',
 				pin: true,
@@ -99,7 +99,7 @@ const animateStart = () => {
 			}
 		})
 		.from('.animate-end h2', { x: innerWidth * -1 })
-		.from('.animate-end .animate-end-icon', { y: innerHeight * -1 })
+		.from('.animate-end .animate-end-icon', { y: innerHeight * 1 })
 }
 onMounted(() => {
 	animateStart()

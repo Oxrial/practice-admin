@@ -2,7 +2,6 @@
 	<el-pagination
 		background
 		v-bind="$attrs"
-		:layout="config.layout || 'total,prev, pager, next, sizes, jumper'"
 		@size-change="sizeChange"
 		@current-change="currentChange"
 	/>
@@ -14,6 +13,10 @@ const props = defineProps({
 		type: Object,
 		default: () => {
 			return {
+				layout: {
+					type: String,
+					default: 'total,prev, pager, next, sizes, jumper'
+				},
 				pagerCount: { type: Number, default: 5 },
 				pageSizes: { type: Array, default: () => [10, 20, 30, 40, 50, 100] },
 				pageSize: { type: Number, default: 0 },
@@ -25,11 +28,11 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['current-change', 'size-change'])
-const sizeChange = (params) => {
-	emit('size-change', params)
+const sizeChange = (val) => {
+	emit('size-change', val)
 }
-const currentChange = (params) => {
-	emit('current-change', params)
+const currentChange = (val) => {
+	emit('current-change', val)
 }
 </script>
 <style></style>

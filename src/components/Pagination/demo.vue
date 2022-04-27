@@ -2,9 +2,14 @@
 	<el-card>
 		<Pagination
 			v-bind="page.config"
-			layout="'total,prev, pager, next, sizes'"
-			:config="page.config"
+			:total="25"
 			@current-change="(val) => (page.config.currentPage = val)"
+			@size-change="
+				(val) => {
+					page.config.pageSize = val
+					page.config.currentPage = 1
+				}
+			"
 		/>
 	</el-card>
 </template>
@@ -13,8 +18,8 @@
 import Pagination from './index.vue'
 const page = reactive({
 	config: {
+		layout: 'total,prev, pager, next, sizes',
 		pageSize: 10,
-		total: 20,
 		currentPage: 1
 	}
 })

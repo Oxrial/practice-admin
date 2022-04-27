@@ -73,7 +73,7 @@ export const routes: Array<RouteRecordRaw> = [
 			// 拼接新标签全路径
 			const fullPath = to.fullPath + '/index'
 			// 新标签页name：window窗口实例名，pinia存储依据
-			const name = (to.fullPath.substring(1) + 'index').toUpperCase()
+			const name = (to.fullPath.replaceAll('/', '') + 'index').toUpperCase()
 			// 根据name查找pinia实例中是否存在相关数据
 			const windowInstance = windowTab.getWinTabByName(name)
 			// 解构pinia实例
@@ -136,6 +136,11 @@ export const routes: Array<RouteRecordRaw> = [
 				path: 'pagination',
 				component: () => import('@/components/Pagination/demo.vue'),
 				meta: { title: '分页', icon: 'el-icon-documentcopy' }
+			},
+			{
+				path: 'vxegrid',
+				component: () => import('@/views/vxe/index.vue'),
+				meta: { title: 'Vxe-Grid', icon: 'el-icon-documentcopy' }
 			}
 		]
 	}
@@ -161,4 +166,16 @@ const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes
 })
+router.beforeEach(
+	(
+		to: RouteLocationNormalized,
+		from: RouteLocationNormalizedLoaded,
+		next: NavigationGuardNext
+	) => {
+		const name = to.fullPath.replaceAll('/', '').toUpperCase()
+		// window name与路由匹配
+		window.name = name
+		next()
+	}
+)
 export default router

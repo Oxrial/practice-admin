@@ -1,13 +1,30 @@
 @import '@/assets/style.module.scss';
-::-webkit-scrollbar {
+:deep(::-webkit-scrollbar) {
 	width: 6px !important;
 	height: 6px !important;
-	// background-color: $Gray2;
+	background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb {
-	background-color: #90939980 !important;
+:deep(::-webkit-scrollbar-thumb) {
+	background-color: #90939980;
 	border-radius: 5px;
+}
+:deep(::-webkit-scrollbar-track) {
+	background-color: transparent;
+}
+:deep(::-webkit-scrollbar-track-piece) {
+	background-color: transparent;
+}
+:deep(::-webkit-scrollbar-thumb:hover) {
+	background-color: #7f808380;
+	border-radius: 5px;
+}
+:deep(::-webkit-scrollbar-thumb:active) {
+	background-color: #6b6c7080;
+	border-radius: 5px;
+}
+:deep(::-webkit-scrollbar-corner) {
+	background-color: transparent;
 }
 
 .el-aside {
@@ -22,7 +39,6 @@
 	align-items: center;
 }
 .el-main {
-	// padding: unset;
 	height: calc(100vh - theme(logo_height));
 	background-color: theme(main_background_color);
 }

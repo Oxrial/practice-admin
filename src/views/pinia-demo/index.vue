@@ -1,23 +1,25 @@
 <template>
-	<el-card>
-		PINIA
-		<div>NAME: {{ Test.name }} NUMBER: {{ Test.number }}</div>
-	</el-card>
-	<el-button @click="changeTest1"> 直接改值 </el-button>
-	<el-button @click="changeTest2"> $patch 改值 对象 </el-button>
-	<el-button @click="changeTest3"> $patch 改值 工厂函数 </el-button>
-	<el-button @click="changeTest4"> $state 改值 </el-button>
-	<el-button @click="changeTest5"> action 改值 </el-button>
-	<el-button @click="changeTest6"> $reset 重置值 </el-button>
-	<el-card>
-		解构式
-		<div>NAME:{{ name }} NUMBER: {{ number }}</div>
-	</el-card>
-	<el-card>
-		GETTER
-		注：getter方法中的参数不接受任何自定义参数，默认参数的类型即仅有其state
-		<div>getter方法调用: {{ Test.getName }}</div>
-	</el-card>
+	<div>
+		<el-card>
+			PINIA
+			<div>NAME: {{ Test.name }} NUMBER: {{ Test.number }}</div>
+		</el-card>
+		<el-button @click="changeTest1"> 直接改值 </el-button>
+		<el-button @click="changeTest2"> $patch 改值 对象 </el-button>
+		<el-button @click="changeTest3"> $patch 改值 工厂函数 </el-button>
+		<el-button @click="changeTest4"> $state 改值 </el-button>
+		<el-button @click="changeTest5"> action 改值 </el-button>
+		<el-button @click="changeTest6"> $reset 重置值 </el-button>
+		<el-card>
+			解构式
+			<div>NAME:{{ name }} NUMBER: {{ number }}</div>
+		</el-card>
+		<el-card>
+			GETTER
+			注：getter方法中的参数不接受任何自定义参数，默认参数的类型即仅有其state
+			<div>getter方法调用: {{ Test.getName }}</div>
+		</el-card>
+	</div>
 </template>
 
 <script setup lang="ts">
@@ -41,8 +43,6 @@ const { name, number } = storeToRefs(Test)
 // 当内容更新提交值时触发
 Test.$subscribe(
 	(args, state) => {
-		console.log(111)
-
 		ElNotification({
 			title: 'args',
 			message: JSON.stringify(args),
@@ -57,16 +57,14 @@ Test.$subscribe(
 		)
 	},
 	{
-		detached: true,
+		// detached: true,
 		deep: true,
 		flush: 'post'
 	}
 )
 // 监听action中的方法，调用时执行，异步
 Test.$onAction(
-	() => {
-		console.log(222)
-	},
+	() => {},
 	// detached组件销毁后继续监听
 	true
 )

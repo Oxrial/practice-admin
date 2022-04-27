@@ -121,29 +121,27 @@
 					<div class="left_chart_wrap chart_box b_img_ranking">
 						<div class="common_header">实时接口风险</div>
 						<div class="ranking_wrap ranking_roll" id="wrapper">
-							<div id="list_one">
+							<div class="main">
 								<el-row
 									class="Interface"
-									v-for="(item, index) in dataMap.list"
+									v-for="(item, index) in dataMap.data"
 									:key="index"
 								>
-									<el-col :span="15" :offset="2">
+									<el-col :span="20" :offset="2">
 										<el-row class="Interface_padding">
 											<el-col :span="12">{{ item.name }}</el-col>
-											<el-col :span="12" class="Interface_date">{{
-												item.date
-											}}</el-col>
+											<el-col :span="12" class="Interface_date">
+												{{ item.date }}
+											</el-col>
 										</el-row>
-										<el-row>
-											<el-col :span="24" class="Interface_text">{{
-												item.text
-											}}</el-col>
+										<el-row class="Interface_padding">
+											<el-col :span="24" class="Interface_text">
+												{{ item.text + item.name }}
+											</el-col>
 										</el-row>
 									</el-col>
-									<el-col :span="1" :offset="1">11</el-col>
 								</el-row>
 							</div>
-							<div id="list_two"></div>
 						</div>
 					</div>
 				</el-card>
@@ -159,6 +157,7 @@
 <script setup lang="ts">
 import 'animate.css'
 import gsap from 'gsap'
+import { ElTableColumn } from 'element-plus'
 const flag = ref(true)
 const flag2 = ref(true)
 
@@ -239,63 +238,40 @@ const enterTo = (el: Element) => {
 const enterCancel = (el: Element) => {
 	// 过度打断
 }
-
-const dataMap = reactive({
-	list: [
-		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游8路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' },
-		{ name: '浙A89268', date: '游1路', text: 'zhelishiwenben' }
+type columns = {
+	label: string
+	prop: string
+	width?: number | string
+}
+type data = {
+	name: string
+	date: string
+	text: string
+}
+type listdata = { columns: Array<columns>; data: data[] }
+const dataMap = reactive<listdata>({
+	columns: [
+		{ label: '名', prop: 'name' },
+		{ label: '日', prop: 'date' },
+		{ label: '文', prop: 'text' }
+	],
+	data: [
+		{ name: '1', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '2', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '3', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '4', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '5', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '6', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '7', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '8', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '9', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '10', date: '游8路', text: 'zhelishiwenben' },
+		{ name: '---', date: '---', text: 'zhelishiwenben' }
 	]
 })
-const scroll = () => {
-	let speed = 100
-	let wrapper = document.getElementById('wrapper')
-	let list_one = document.getElementById('list_one')
-	let list_two = document.getElementById('list_two')
-	list_two!.innerHTML = list_one!.innerHTML
-	console.log(list_one!.innerHTML)
-	function Marquee() {
-		if (list_two!.offsetHeight - wrapper!.scrollTop <= 0)
-			wrapper!.scrollTop -= list_one!.offsetHeight
-		else {
-			wrapper!.scrollTop += 3
-		}
-	}
-	let MyMar = setInterval(Marquee, speed)
-	wrapper!.onmouseover = function () {
-		clearInterval(MyMar)
-	}
-	wrapper!.onmouseout = function () {
-		MyMar = setInterval(Marquee, speed)
-	}
-}
 onMounted(() => {
-	scroll()
+	// dataMap.list.push(...dataMap.list)
+	console.log(window)
 })
 </script>
 

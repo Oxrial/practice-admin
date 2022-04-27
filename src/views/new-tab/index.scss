@@ -52,15 +52,26 @@
 				}
 			}
 			.ranking_roll {
-				max-height: 200px;
+				height: 300px;
 				overflow: hidden;
+				.main {
+					animation: move 15s linear infinite;
+				}
 				.Interface {
 					background-color: rgba(84, 82, 224, 0.3);
 				}
-				#wrapper {
-					transition: all 3s;
+				.Interface_padding {
+					display: flex;
 				}
 			}
 		}
+	}
+}
+
+@keyframes move {
+	0% {
+	}
+	100% {
+		transform: translateY(-50%);
 	}
 }
