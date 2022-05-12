@@ -1,7 +1,7 @@
 .search-form {
 	padding: 20px 0 2px 20px;
 	//background: rgb(4, 23, 75);
-	:deep(.el-input__inner) {
+	:deep(.el-form-item) {
 		width: 250px;
 	}
 	:deep(.el-textarea) {
@@ -17,26 +17,24 @@
 .dialog-form {
 	padding: 20px 0 2px 20px;
 	background: #fff;
-	.el-form {
-		margin: 0 auto;
-		width: 83%;
-		display: flex;
-		flex-wrap: wrap;
-		.el-form-item {
-			&.full {
-				width: calc(100% / 2 - 12px);
-				:deep(.el-form-item__content) {
-					width: calc(100% - 120px);
-					& > * {
-						width: 100%;
-					}
+	margin: 0 auto;
+	width: 83%;
+	display: flex;
+	flex-wrap: wrap;
+	.el-form-item {
+		&.full {
+			width: calc(100% / 2 - 32px);
+			:deep(.el-form-item__content) {
+				width: calc(100% - 120px);
+				& > * {
+					width: 100%;
 				}
 			}
-			&.inline {
-				width: 100%;
-				&.right {
-					text-align: right;
-				}
+		}
+		&.inline {
+			width: 100%;
+			&.right {
+				text-align: right;
 			}
 		}
 	}
