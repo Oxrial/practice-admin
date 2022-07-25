@@ -1,13 +1,20 @@
 <template>
-	<vxe-grid v-bind="vxeState" v-on="gridEvents">
+	<vxe-grid
+		v-bind="vxeState"
+		v-on="gridEvents"
+		:data="vxeState.data!.slice(
+			(currentPage as number - 1) * (pageSize as number),
+			(currentPage as number) * (pageSize as number)
+		)"
+	>
 		<template #form>
 			<Form :model="model" :options="options" search>
 				<template #opration="{ model, form }">
 					<el-button @click="submit(form, model)">submit</el-button>
 					<el-button @click="reset(form)">reset</el-button>
+					<el-button @click="enn">enn</el-button>
 				</template>
 			</Form>
-			<el-button @click="enn">enn</el-button>
 		</template>
 		<template #operation="{ row }">
 			<vxe-button
@@ -20,10 +27,12 @@
 </template>
 
 <script setup lang="ts">
-import { VxeGridProps, VxeGridListeners } from 'vxe-table'
+import { VxeGridProps, VxeGridListeners, VxeGridPropTypes } from 'vxe-table'
 import Form from '@/components/Form/index.vue'
-import { FormOptions } from '@/components/Form/types'
-import { ElMessage, FormInstance } from 'element-plus'
+import { FormOptions, FormInstance } from '@/components/Form/types'
+import { ElMessage } from 'element-plus'
+import { Ref } from 'vue'
+import { toReactive } from '@vueuse/shared'
 type TForm = {
 	[key: string]: any
 }
@@ -85,23 +94,26 @@ const enn = () => {
 		key in model && (model[key] = obj[key as keyof typeof obj])
 	}
 }
-
-const submit = (form: FormInstance, model: any) => {
-	form.validate((valid) => {
-		if (valid) {
-			ElMessage.success(JSON.stringify(model))
-		} else {
-			ElMessage.error('校验异常，请检查')
-		}
-	})
+// 确定
+const submit = (form: FormInstance | null | undefined, model: any) => {
+	form &&
+		form.validate((valid: any) => {
+			if (valid) {
+				ElMessage.success(JSON.stringify(model))
+			} else {
+				ElMessage.error('校验异常，请检查')
+			}
+		})
 }
-const reset = (form: FormInstance) => {
-	form.resetFields()
+// 重置
+const reset = (form: FormInstance | null | undefined) => {
+	form && form.resetFields()
 }
 const vxeState = reactive<VxeGridProps>({
 	border: true,
 	showOverflow: true,
 	loading: false,
+	height: 700,
 	// exportConfig: {},
 	columnConfig: {
 		resizable: true
@@ -139,13 +151,32 @@ const vxeState = reactive<VxeGridProps>({
 			fixed: 'right'
 		}
 	],
-	data: []
+	data: [],
+	pagerConfig: {
+		currentPage: 1,
+		pageSize: 10,
+		total: 0,
+		layouts: [
+			'PrevJump',
+			'PrevPage',
+			'JumpNumber',
+			'NextPage',
+			'NextJump',
+			'Sizes',
+			'FullJump',
+			'Total'
+		],
+		pageSizes: [10, 15, 20, 50, 100]
+	}
 })
+const { currentPage, pageSize } = toRefs(
+	vxeState.pagerConfig as VxeGridPropTypes.PagerConfig
+)
 
 const findList = () => {
 	vxeState.loading = true
 	setTimeout(() => {
-		vxeState.data = [
+		const data = [
 			{
 				id: 10001,
 				name: 'Test1',
@@ -190,8 +221,73 @@ const findList = () => {
 				sex: '0',
 				age: 30,
 				address: 'Shanghai'
+			},
+			{
+				id: 10006,
+				name: 'Test6',
+				nickname: 'T6',
+				role: 'Develop',
+				sex: '0',
+				age: 30,
+				address: 'Shanghai'
+			},
+			{
+				id: 10007,
+				name: 'Test7',
+				nickname: 'T7',
+				role: 'Develop',
+				sex: '0',
+				age: 30,
+				address: 'Shanghai'
+			},
+			{
+				id: 10008,
+				name: 'Test8',
+				nickname: 'T8',
+				role: 'Develop',
+				sex: '0',
+				age: 30,
+				address: 'Shanghai'
+			},
+			{
+				id: 10009,
+				name: 'Test9',
+				nickname: 'T9',
+				role: 'Develop',
+				sex: '0',
+				age: 30,
+				address: 'Shanghai'
+			},
+			{
+				id: 10010,
+				name: 'Test10',
+				nickname: 'T10',
+				role: 'Develop',
+				sex: '0',
+				age: 30,
+				address: 'Shanghai'
+			},
+			{
+				id: 10011,
+				name: 'Test11',
+				nickname: 'T11',
+				role: 'Develop',
+				sex: '0',
+				age: 30,
+				address: 'Shanghai'
+			},
+			{
+				id: 10012,
+				name: 'Test12',
+				nickname: 'T12',
+				role: 'Develop',
+				sex: '0',
+				age: 30,
+				address: 'Shanghai'
 			}
 		]
+		vxeState.data = data
+		vxeState.pagerConfig!.total = data.length
 		vxeState.loading = false
 	}, 500)
 }
@@ -199,6 +295,10 @@ const findList = () => {
 const gridEvents: VxeGridListeners = {
 	formSubmit() {
 		findList()
+	},
+	pageChange({ type, currentPage, pageSize, $event }) {
+		type === 'current' && (vxeState.pagerConfig!.currentPage = currentPage)
+		console.log(type, currentPage, pageSize, $event)
 	}
 }
 

@@ -1,0 +1,140 @@
+/*baseTable.js样式*/
+.border-unset {
+	border: 0;
+}
+.symbol-table {
+	:deep(.el-card__header) {
+		padding: 5px;
+		border: 0;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+
+		span {
+			font-size: 15px;
+			font-weight: bold;
+		}
+
+		.header,
+		.header-right {
+			align-items: center;
+			.el-icon-search:hover,
+			.el-icon-refresh-left:hover {
+				cursor: pointer;
+				color: skyblue;
+			}
+		}
+
+		.header {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.header-right {
+			display: flex;
+			width: 165px;
+			justify-content: flex-end;
+			margin-right: 5px;
+
+			.el-input {
+				min-width: 145px;
+			}
+		}
+	}
+
+	:deep(.el-card__body) {
+		.el-table {
+			border-radius: 4px;
+		}
+
+		.el-table__fixed,
+		.el-table__fixed-right {
+			/* 让固定列的高自适应，且设置!important覆盖ele-ui的默认样式 */
+			height: auto !important;
+			/*
+          固定列默认设置了定位，position: absolute;top: 0;left: 0;
+          只需要再设置一下bottom的值，让固定列和父元素的底部出现距离即可
+      */
+			bottom: 10px !important;
+		}
+
+		.el-table--mini {
+			td,
+			th {
+				padding: 0;
+			}
+		}
+
+		.el-pagination {
+			padding: 2px 0;
+
+			& > * {
+				margin: 0 5px;
+			}
+
+			span:not([class*='suffix']) {
+				font-size: 12px;
+			}
+
+			.el-pagination__sizes {
+				margin: 0;
+			}
+
+			.el-pagination__jump {
+				margin-left: 0;
+			}
+
+			.el-select {
+				.el-input {
+					width: 90px;
+					margin: 0;
+				}
+			}
+
+			.el-input--mini {
+				.el-input__icon {
+					line-height: 22px;
+				}
+			}
+
+			.el-input__inner {
+				height: 22px;
+				line-height: 22px;
+			}
+		}
+
+		.el-dialog {
+			.el-scrollbar__wrap {
+				overflow-x: hidden;
+
+				.el-scrollbar__view {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+				}
+			}
+
+			.el-scrollbar__bar.is-horizontal {
+				opacity: 0;
+			}
+
+			.el-form {
+				label {
+					width: 120px !important;
+				}
+
+				.el-form-item__content {
+					margin-left: 120px !important;
+					& > * {
+						width: 375px;
+					}
+				}
+
+				.el-form-item.is-required {
+					label::before {
+						margin-left: -10px;
+					}
+				}
+			}
+		}
+	}
+}

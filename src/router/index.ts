@@ -106,6 +106,16 @@ export const routes: Array<RouteRecordRaw> = [
 		component: Layout,
 		children: [
 			{
+				path: 'type-check',
+				component: () => import('@/views/type-check/index.vue'),
+				meta: { title: '数组操纵', icon: 'el-icon-eleme' }
+			},
+			{
+				path: 'grid',
+				component: () => import('@/views/grid/index.vue'),
+				meta: { title: '高级表格', icon: 'el-icon-eleme' }
+			},
+			{
 				path: 'shuffle',
 				component: () => import('@/views/shuffle/index.vue'),
 				meta: { title: '随机', icon: 'el-icon-eleme' }
@@ -117,7 +127,7 @@ export const routes: Array<RouteRecordRaw> = [
 			},
 			{
 				path: 'bus',
-				component: () => import('@/views/bus-demo/index.vue'),
+				component: () => import('@/views/bus-provide-inject/index.vue'),
 				meta: { title: '公共串行BUS', icon: 'el-icon-eleme' }
 			},
 			{

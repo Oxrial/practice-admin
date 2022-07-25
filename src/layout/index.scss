@@ -37,6 +37,7 @@
 	border-bottom: 1px theme(header_border_color) solid;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 }
 .el-main {
 	height: calc(100vh - theme(logo_height));

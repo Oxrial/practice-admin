@@ -4,12 +4,18 @@
 			PINIA
 			<div>NAME: {{ Test.name }} NUMBER: {{ Test.number }}</div>
 		</el-card>
-		<el-button @click="changeTest1"> 直接改值 </el-button>
-		<el-button @click="changeTest2"> $patch 改值 对象 </el-button>
-		<el-button @click="changeTest3"> $patch 改值 工厂函数 </el-button>
-		<el-button @click="changeTest4"> $state 改值 </el-button>
-		<el-button @click="changeTest5"> action 改值 </el-button>
-		<el-button @click="changeTest6"> $reset 重置值 </el-button>
+		<el-card>
+			<el-button type="primary" @click="changeTest1"> 直接改值 </el-button>
+			<el-button type="primary" @click="changeTest2">
+				$patch 改值 对象
+			</el-button>
+			<el-button type="primary" @click="changeTest3">
+				$patch 改值 工厂函数
+			</el-button>
+			<el-button type="primary" @click="changeTest4"> $state 改值 </el-button>
+			<el-button type="primary" @click="changeTest5"> action 改值 </el-button>
+			<el-button @click="changeTest6"> $reset 重置值 </el-button>
+		</el-card>
 		<el-card>
 			解构式
 			<div>NAME:{{ name }} NUMBER: {{ number }}</div>

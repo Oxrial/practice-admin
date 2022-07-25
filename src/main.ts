@@ -20,7 +20,8 @@ import {
 	Tooltip,
 	Button,
 	Table,
-	Grid
+	Grid,
+	Pager
 } from 'vxe-table'
 import XEUtils from 'xe-utils'
 import zhCN from 'vxe-table/es/locale/lang/zh-CN'
@@ -47,6 +48,7 @@ function useVxeTable(app: App) {
 		.use(Toolbar)
 		.use(Tooltip)
 		.use(Button)
+		.use(Pager)
 		.use(Table)
 }
 

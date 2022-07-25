@@ -8,6 +8,9 @@
 			label-width="120px"
 			class="demo-ruleForm"
 		>
+			<el-form-item label="用户" prop="user">
+				<el-input v-model="ruleForm.user" />
+			</el-form-item>
 			<el-form-item label="密码" prop="pass">
 				<el-input v-model="ruleForm.pass" type="password" autocomplete="off" />
 			</el-form-item>
@@ -35,6 +38,9 @@
 import { reactive, ref } from 'vue'
 import { FormInstance, ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
+
+import { useUserStore } from '@/store/user'
+const User = useUserStore()
 
 const ruleFormRef = ref<FormInstance>()
 
@@ -77,6 +83,7 @@ const validatePass2 = (rule: any, value: any, callback: any) => {
 }
 
 const ruleForm = reactive({
+	user: 'Aya',
 	pass: '123456',
 	checkPass: '123456',
 	age: 18
@@ -91,9 +98,13 @@ const rules = reactive({
 const router = useRouter()
 const submitForm = (formEl: FormInstance | undefined) => {
 	if (!formEl) return
+	console.log(formEl)
+
 	formEl.validate((valid) => {
 		if (valid) {
-			console.log('提交!')
+			User.setUser(ruleForm.user)
+			console.log('提交! ' + User.getUser)
+
 			ElMessage({
 				message: '登录成功，正在跳转至首页...',
 				type: 'success'

@@ -1,0 +1,59 @@
+.el-card {
+	:deep(.el-card__header) {
+		display: flex;
+		justify-content: space-between;
+		.header-left > span {
+			margin-right: 20px;
+			font-weight: bold;
+			font-size: 18px;
+		}
+	}
+}
+
+$dot: 130px;
+// 进行参数计算时使用calc包裹
+.wraps {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	margin: 20px auto;
+	&.qing,
+	&.zhuo {
+		@extend %form-yin50;
+		align-content: center;
+	}
+	&.ao {
+		@extend %form-yin36;
+	}
+	.wraps-item {
+		width: $dot;
+		height: calc($dot / 2.3);
+		border-radius: 15px;
+		margin: 0 10px 10px 0;
+		border: 1px gray solid;
+		background: rgb(128, 146, 233);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		:deep(.el-form-item__label) {
+			color: aliceblue;
+			font-size: 20px;
+		}
+		.el-input {
+			width: calc($dot / 2);
+		}
+	}
+}
+.wraps-move {
+	transition: all 1s ease;
+}
+
+@mixin yinShow($line: 5) {
+	height: calc(($dot/2 + 10px) * $line + 18px);
+}
+%form-yin50 {
+	@include yinShow();
+}
+%form-yin36 {
+	@include yinShow(3);
+}

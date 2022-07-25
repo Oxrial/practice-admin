@@ -43,10 +43,10 @@
 </template>
 
 <script setup lang="ts">
-import { FormInstance } from 'element-plus'
 import { cloneDeep } from 'lodash-es'
 import { any, array, bool, string } from 'vue-types'
-import { FormOptions } from './types'
+import { FormOptions, FormInstance } from './types'
+
 /*
 import { XOR } from 'ts-xor'
 type PropBase = {
