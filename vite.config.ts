@@ -6,7 +6,11 @@ import {
 	createStyleImportPlugin,
 	VxeTableResolve
 } from 'vite-plugin-style-import'
-import autoImport from 'unplugin-auto-import/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import {
+  ElementPlusResolver
+} from 'unplugin-vue-components/resolvers'
 import setupExtend from 'vite-plugin-vue-setup-extend'
 
 // https://vitejs.dev/config/
@@ -18,10 +22,17 @@ export default defineConfig({
 		createStyleImportPlugin({
 			resolves: [VxeTableResolve()]
 		}),
-		autoImport({
+		AutoImport({
 			imports: 'vue',
-			dts: 'src/auto-import.d.ts'
+			dts: 'src/auto-import.d.ts',
+      resolvers: [ElementPlusResolver()]
 		}),
+    Components({
+      include: [/\.vue$/, /\.vue\?vue/, /\?vue/, /\.tsx$/],
+      exclude: ['./components/Pagination/demo.vue'],
+      dts: 'src/components.d.ts',
+      resolvers: [ElementPlusResolver()]
+  }),
 		setupExtend()
 	],
 	resolve: {
@@ -31,6 +42,6 @@ export default defineConfig({
 	},
 	server: {
 		port: 9009,
-		open: true
+		open: false
 	}
 })

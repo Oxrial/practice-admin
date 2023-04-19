@@ -1,11 +1,19 @@
 <template>
-	{{ parValue || '-' }}
-	<div>
-		A
-		<div>B</div>
-		<div>C</div>
-	</div>
-	<el-button @click="toArray(preValue)"> CLICK </el-button>
+	<el-card>
+		{{ parValue || '-' }}
+		<div>
+			A
+			<div>B</div>
+			<div>C</div>
+		</div>
+		<div>
+			<p>Array.prototype.slice.call 改变数组slice方法的作用域，</p>
+			<p>使this指向arguments对象</p>
+			<div>
+				<el-button @click="toArray(preValue)"> CLICK </el-button>
+			</div>
+		</div>
+	</el-card>
 </template>
 
 <script setup lang="ts">
@@ -28,9 +36,7 @@ const toArray = (f: any) => {
 	}
 	console.log(parValue.value)
 }
-onMounted(() => {
-	preValue.value = document.querySelectorAll('.el-main div')
-})
+onMounted(() => (preValue.value = document.querySelectorAll('.el-main div')))
 </script>
 
 <style scoped lang="scss"></style>

@@ -5,8 +5,6 @@ import router from './router'
 
 import 'normalize.css/normalize.css'
 
-import ElementPlus from 'element-plus'
-import locale from 'element-plus/lib/locale/lang/zh-cn'
 import 'element-plus/theme-chalk/index.css'
 
 import {
@@ -28,6 +26,9 @@ import zhCN from 'vxe-table/es/locale/lang/zh-CN'
 import 'vxe-table/lib/style.css'
 
 import { createPinia } from 'pinia'
+import piniaPersist from 'pinia-plugin-persist'
+const pinia = createPinia()
+pinia.use(piniaPersist)
 
 import * as Icons from '@element-plus/icons-vue'
 import { hump2Bar } from './utils'
@@ -59,7 +60,6 @@ for (const icon in Icons) {
 
 app
 	.use(router)
-	.use(ElementPlus, { locale })
 	.use(useVxeTable)
-	.use(createPinia())
+	.use(pinia)
 	.mount('#app')

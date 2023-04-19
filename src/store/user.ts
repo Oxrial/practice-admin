@@ -15,5 +15,8 @@ export const useUserStore = defineStore('USER', {
 			this.user = val
 		}
 		// 可以使用async await 进行同步调用
+	},
+	persist: {
+		enabled: true // 开启数据缓存
 	}
 })

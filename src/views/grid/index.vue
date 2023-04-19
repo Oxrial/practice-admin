@@ -52,11 +52,6 @@
 		:height="300"
 		title="aaa"
 	>
-		<template #slash>
-			<el-table-column prop="year" label="类型">
-				<el-table-column prop="year" label="序号"></el-table-column>
-			</el-table-column>
-		</template>
 	</BaseTable>
 </template>
 
@@ -65,7 +60,10 @@ import BaseTable from '@/components/BaseTable/index.vue'
 const state = reactive({
 	columns: [
 		{
-			slot: 'slash'
+			slash: true,
+			labelTop: '类型',
+			labelBottom: '序号',
+			prop: 'year'
 		},
 		{
 			label: '重量',

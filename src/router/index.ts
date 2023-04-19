@@ -110,11 +110,16 @@ export const routes: Array<RouteRecordRaw> = [
 				component: () => import('@/views/type-check/index.vue'),
 				meta: { title: '数组操纵', icon: 'el-icon-eleme' }
 			},
-			{
-				path: 'grid',
-				component: () => import('@/views/grid/index.vue'),
-				meta: { title: '高级表格', icon: 'el-icon-eleme' }
-			},
+			// {
+			// 	path: 'grid',
+			// 	component: () => import('@/views/grid/index.vue'),
+			// 	meta: { title: '高级表格', icon: 'el-icon-eleme' }
+			// },
+			// {
+			// 	path: 'common-grid',
+			// 	component: () => import('@/components/table/demo.vue'),
+			// 	meta: { title: '公共高级表格', icon: 'el-icon-eleme' }
+			// },
 			{
 				path: 'shuffle',
 				component: () => import('@/views/shuffle/index.vue'),

@@ -7,8 +7,8 @@
 
 <script setup>
 import { ref, provide } from 'vue'
-import BusB from '@/components/BusB/index.vue'
-import BusA from '@/components/BusA/index.vue'
+import BusB from './BusB/index.vue'
+import BusA from './BusA/index.vue'
 // 供给静态值
 provide('vStatic', 'static_value')
 
