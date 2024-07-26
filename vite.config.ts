@@ -10,7 +10,7 @@ import setupExtend from 'vite-plugin-vue-setup-extend'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	base: '/',
+	base: '/practice-admin/',
 	plugins: [
 		vue(),
 		vueJsx(),
